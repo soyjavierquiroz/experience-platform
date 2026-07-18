@@ -1,0 +1,2 @@
+"use client";
+export default function GlobalError({reset}:{error:Error & {digest?:string};reset:()=>void}){return <main className="access-page"><section className="access-card"><span className="eyebrow">Algo no salió bien</span><h1>Hagamos una pausa</h1><p>No pudimos mostrar esta pantalla. Tu progreso no se ha modificado.</p><button className="button" onClick={reset}>Intentar de nuevo</button></section></main>}

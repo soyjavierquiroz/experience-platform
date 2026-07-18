@@ -1,0 +1,3 @@
+import { expect, test } from "@playwright/test";
+test("landing, app and day one are navigable",async({page})=>{await page.goto("/");await expect(page.getByRole("heading",{name:"Antes de escribirle, vuelve a ti."})).toBeVisible();await page.goto("/app");await expect(page.getByRole("heading",{name:"Hola, respira."})).toBeVisible();await page.getByRole("link",{name:"Empezar el Día 1"}).click();await expect(page.getByRole("heading",{name:"Reconoce el ciclo"})).toBeVisible()});
+test("health endpoint responds",async({request})=>{const response=await request.get("/api/health");expect(response.ok()).toBe(true);expect(await response.json()).toEqual({status:"ok",service:"experience-platform",tenant:"mnle"})});

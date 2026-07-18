@@ -1,0 +1,2 @@
+import type { MetadataRoute } from "next";
+export default function manifest(): MetadataRoute.Manifest { return { name:"Mujer, No Le Escribas", short_name:"MNLE", description:"Siete días para pausar, comprender y volver a elegirte.", start_url:"/app", scope:"/", display:"standalone", background_color:"#f7f2ed", theme_color:"#533b43", lang:"es", orientation:"portrait-primary", icons:[{src:"/icons/icon.svg",sizes:"any",type:"image/svg+xml",purpose:"any"},{src:"/icons/icon-maskable.svg",sizes:"any",type:"image/svg+xml",purpose:"maskable"}] } }

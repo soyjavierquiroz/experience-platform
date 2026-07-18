@@ -1,0 +1,2 @@
+import { Brand } from "@/components/brand"; import type { TenantConfig } from "@/features/tenants/types"; import { BottomNav } from "./bottom-nav";
+export function AppShell({tenant,children}:{tenant:TenantConfig;children:React.ReactNode}){return <div className="app-shell"><header className="app-header"><div className="brand-name"><Brand tenant={tenant}/></div><div className="avatar" aria-label="Perfil demo">TÚ</div></header><main className="main">{children}</main><BottomNav/></div>}

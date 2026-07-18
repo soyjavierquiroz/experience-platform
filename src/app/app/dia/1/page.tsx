@@ -1,0 +1,2 @@
+import { ContentBlockRenderer } from "@/features/content/renderer"; import { dayOneBlocks } from "@/features/content/day-one"; import { getTenant } from "@/features/tenants/server";
+export default async function DayOnePage(){const tenant=await getTenant();const day=tenant.journey[0];return <><header className="day-hero"><span className="eyebrow">Día 1 de 7</span><h1>{day.title}</h1><p>{day.objective}</p></header><div className="content-flow">{dayOneBlocks.map(block=><ContentBlockRenderer block={block} key={block.id}/>)}</div></>}

@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function OfflinePage(){return <main className="access-page"><section className="access-card"><span className="brand-mark">M</span><h1>Estás sin conexión</h1><p>Este momento también puede ser una pausa. Revisa tu conexión e inténtalo de nuevo; el contenido que ya visitaste puede seguir disponible.</p><Link className="button" href="/app">Intentar de nuevo</Link></section></main>}

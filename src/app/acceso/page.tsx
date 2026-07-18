@@ -1,0 +1,2 @@
+import Link from "next/link"; import { Brand } from "@/components/brand"; import { getTenant } from "@/features/tenants/server";
+export default async function AccessPage(){const tenant=await getTenant();return <main className="access-page"><section className="access-card"><Brand tenant={tenant}/><h1>Tu espacio seguro</h1><p>El acceso seguro por código se habilitará en la siguiente iteración. Mientras tanto, puedes recorrer la experiencia inicial sin crear una cuenta.</p><Link className="button" href="/app">Ver demo</Link></section></main>}

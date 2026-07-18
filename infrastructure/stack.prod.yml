@@ -1,0 +1,61 @@
+version: "3.9"
+services:
+  web:
+    image: ${EXPERIENCE_IMAGE:-experience-platform:bootstrap}
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: 0.0.0.0
+      APP_URL: https://mnle.sayk.us
+      DEFAULT_TENANT_SLUG: mnle
+      TENANT_RESOLUTION_MODE: hostname
+    networks:
+      - traefik_public
+      - general_network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      resources:
+        reservations:
+          cpus: "0.15"
+          memory: 192M
+        limits:
+          cpus: "0.75"
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 60s
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+        failure_action: rollback
+        monitor: 30s
+      rollback_config:
+        parallelism: 1
+        delay: 5s
+        order: stop-first
+        monitor: 30s
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik_public
+        - traefik.http.routers.experience-platform.rule=Host(`mnle.sayk.us`)
+        - traefik.http.routers.experience-platform.entrypoints=websecure
+        - traefik.http.routers.experience-platform.tls=true
+        - traefik.http.routers.experience-platform.tls.certresolver=le
+        - traefik.http.services.experience-platform.loadbalancer.server.port=3000
+    stop_grace_period: 30s
+networks:
+  traefik_public:
+    external: true
+  general_network:
+    external: true
