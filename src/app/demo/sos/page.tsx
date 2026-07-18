@@ -1,2 +1,2 @@
-import { DemoSos } from "@/components/demo-sos";
-export default function DemoSosPage(){return <><header className="demo-page-hero"><span className="demo-badge">Vista de demostración</span><span className="eyebrow">SOS · Siempre disponible</span><h1>Estoy a punto de escribirle</h1><p>Haz una pausa privada antes de decidir.</p></header><DemoSos/></>}
+import { SosExperience } from "@/components/sos-experience";import { getStaticSosAssets } from "@/features/sos/assets";
+export default async function DemoSosPage(){return <SosExperience mode="demo" assets={await getStaticSosAssets()} dayHref="/demo/dia/1"/>}

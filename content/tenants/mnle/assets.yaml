@@ -1,6 +1,7 @@
 [
  {"schemaVersion":"1.0","key":"mnle-dia-1-video","tenantSlug":"mnle","category":"video","provider":"youtube","providerMediaId":"M7lc1UVf-VE","providerMetadata":{"developmentOnly":true},"title":"Video demo de Día 1","aspectRatio":{"type":"3:4"},"status":"placeholder"},
- {"schemaVersion":"1.0","key":"mnle-sos-audio","tenantSlug":"mnle","category":"audio","provider":"file","providerMetadata":{},"title":"Audio opcional SOS pendiente","aspectRatio":{"type":"3:4"},"status":"placeholder"},
+ {"schemaVersion":"1.0","key":"mnle-sos-audio","tenantSlug":"mnle","category":"audio","provider":"file","providerMetadata":{},"title":"Audio de emergencia con Janny","aspectRatio":{"type":"3:4"},"durationSeconds":42,"sourceUrl":"/media/mnle/00-sos/audio-emergencia.mp3","mediaType":"audio/mpeg","sizeBytes":335424,"status":"ready"},
+ {"schemaVersion":"1.0","key":"mnle-sos-guide","tenantSlug":"mnle","category":"document","provider":"file","providerMetadata":{},"title":"Guía completa del Módulo 0","aspectRatio":{"type":"3:4"},"sourceUrl":"/media/mnle/00-sos/guia-modulo-0.pdf","mediaType":"application/pdf","sizeBytes":15456180,"status":"ready"},
  {"schemaVersion":"1.0","key":"mnle-dia-1-audio","tenantSlug":"mnle","category":"audio","provider":"file","providerMetadata":{},"title":"Audio opcional Día 1 pendiente","aspectRatio":{"type":"3:4"},"status":"placeholder"},
  {"schemaVersion":"1.0","key":"mnle-bunny-demo","tenantSlug":"mnle","category":"video","provider":"bunny","providerMetadata":{"libraryId":"placeholder"},"title":"Bunny pendiente de configuración","aspectRatio":{"type":"9:16"},"status":"placeholder"}
 ]

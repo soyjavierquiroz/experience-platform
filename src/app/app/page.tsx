@@ -13,6 +13,6 @@ export default async function TodayPage(){
   return <div className="today-dashboard">
     <TodayHero eyebrow="Tu espacio de hoy" title="Hola, respira." description={`${session.user.email}. No necesitas tener todas las respuestas. Solo dar el siguiente paso.`}/>
     <NextStepCard label={complete?"Próximamente · Día 2":"Siguiente paso"} title={complete?nextDay.title:day.title} description={complete?"Tu siguiente espacio se abrirá muy pronto.":"Observa qué ocurre antes, durante y después del impulso de escribirle."} href={complete?undefined:"/app/dia/1"} action={complete?undefined:"Comenzar la experiencia"} completed={progress.completed} total={progress.total} percent={progress.percent}/>
-    <SosQuickAction question="¿Sientes el impulso de escribirle?" action="Pausar ahora" href="/app/sos"/>
+    <SosQuickAction question="¿Estás a punto de escribirle?" subtitle="Haz una pausa guiada antes de decidir." action="Hacer mi P.A.U.S.A." href="/app/sos"/>
   </div>;
 }

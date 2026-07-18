@@ -8,5 +8,6 @@ playwright-report
 test-results
 .e2e
 .tmp
+/MNLE/
 *.tsbuildinfo
 .DS_Store
