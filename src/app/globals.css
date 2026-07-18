@@ -28,6 +28,7 @@ h1,h2,h3 { letter-spacing:-.025em; }
 .access-card h1 { margin:26px 0 12px; font-family:Georgia,serif; font-size:2.35rem; font-weight:500; }
 .access-card p { color:var(--muted); line-height:1.6; }
 .access-card .button { width:100%; margin-top:16px; }
+.auth-form { display:grid; gap:12px; margin-top:24px; }.auth-form label { font-size:.86rem;font-weight:750; }.auth-form input { width:100%;min-height:54px;padding:0 16px;border:1px solid var(--line);border-radius:15px;background:#fbf8f5;color:var(--ink);font-size:1rem;outline:none; }.auth-form input:focus { border-color:var(--terracotta);box-shadow:0 0 0 3px rgba(185,120,99,.15); }.auth-form .button { margin-top:4px; }.otp-input { text-align:center;font-size:1.7rem!important;font-weight:800;letter-spacing:.35em; }.form-error { margin:2px 0 0!important;color:#9a3838!important;font-size:.88rem; }.sent-note { margin:0 0 8px!important;font-size:.9rem; }.auth-links { display:flex;justify-content:space-between;gap:12px;margin-top:5px; }.link-button { padding:8px 0;border:0;background:none;color:var(--wine);cursor:pointer;font-weight:750; }.link-button:disabled { opacity:.45;cursor:not-allowed; }
 .app-shell { min-height:100dvh; padding-bottom:calc(94px + env(safe-area-inset-bottom)); }
 .app-header { position:sticky; z-index:20; top:0; display:flex; height:68px; align-items:center; justify-content:space-between; padding:0 max(20px, env(safe-area-inset-left)); border-bottom:1px solid rgba(231,221,214,.8); background:rgba(247,242,237,.92); backdrop-filter:blur(14px); }
 .app-header .brand-name { max-width:230px; overflow:hidden; font-size:.9rem; font-weight:750; text-overflow:ellipsis; white-space:nowrap; }
@@ -54,6 +55,7 @@ h1,h2,h3 { letter-spacing:-.025em; }
 .day-number { display:grid; flex:0 0 46px; height:46px; place-items:center; border-radius:15px; background:#f2e8e1; color:var(--wine); font-weight:800; }
 .day-card h2 { margin-bottom:5px; font-size:1.05rem; }
 .day-card p { margin:0; color:var(--muted); font-size:.88rem; line-height:1.4; }
+.day-state { display:block;margin-top:7px;color:var(--terracotta);font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase; }
 .day-card .lock { margin-left:auto; }
 .day-hero { margin-bottom:24px; }
 .day-hero h1 { margin-bottom:10px; font-family:Georgia,serif; font-size:2.65rem; font-weight:500; }
@@ -68,6 +70,7 @@ h1,h2,h3 { letter-spacing:-.025em; }
 .play { display:grid; width:54px; height:54px; margin-bottom:auto; place-items:center; border:1px solid rgba(255,255,255,.45); border-radius:50%; background:rgba(255,255,255,.14); }
 .reflection textarea { width:100%; margin-top:12px; padding:16px; resize:vertical; border:1px solid var(--line); border-radius:16px; outline:none; background:#fbf8f5; color:var(--ink); }
 .reflection textarea:focus { border-color:var(--terracotta); box-shadow:0 0 0 3px rgba(185,120,99,.15); }
+.save-status { min-height:20px;margin-top:8px;color:var(--muted);font-size:.78rem;text-align:right; }
 .action-card { background:var(--terracotta); color:white; }
 .action-card .eyebrow { color:#fff1eb; }.action-card p { line-height:1.6; }
 .resource { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; }.resource p { margin:0;color:var(--muted);line-height:1.5; }

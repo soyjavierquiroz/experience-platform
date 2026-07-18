@@ -5,6 +5,29 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16.10-alpine
+        env:
+          POSTGRES_DB: experience_platform_test
+          POSTGRES_USER: experience_test
+          POSTGRES_PASSWORD: experience_test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U experience_test -d experience_platform_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://experience_test:experience_test_password@127.0.0.1:5432/experience_platform_test
+      BETTER_AUTH_SECRET: ci-only-auth-secret-at-least-thirty-two-characters
+      APP_URL: http://127.0.0.1:3100
+      BETA_AUTO_ENROLL: "true"
+      AUTH_SECURE_COOKIES: "false"
+      EMAIL_PROVIDER: test
+      ALLOW_TEST_EMAIL_PROVIDER: "true"
+      TEST_OTP_FILE: /tmp/experience-platform-ci-otp.jsonl
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -19,4 +42,8 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
+      - run: pnpm db:migrate && pnpm db:seed
+      - run: pnpm test:integration
       - run: pnpm build
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: touch "$TEST_OTP_FILE" && chmod 600 "$TEST_OTP_FILE" && pnpm test:e2e

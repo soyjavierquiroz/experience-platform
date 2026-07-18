@@ -1,0 +1,3 @@
+import {describe,expect,it} from "vitest";
+import {calculateProgress,reflectionInputSchema} from "./service";
+describe("progress rules",()=>{it("calculates bounded progress",()=>expect(calculateProgress(1,7)).toEqual({completed:1,total:7,percent:14}));it("does not report invented progress",()=>expect(calculateProgress(-2,7).completed).toBe(0));it("validates reflection limits",()=>{expect(reflectionInputSchema.safeParse("muy corta").success).toBe(false);expect(reflectionInputSchema.safeParse("Una reflexión suficientemente clara").success).toBe(true);expect(reflectionInputSchema.safeParse("x".repeat(2001)).success).toBe(false);});});

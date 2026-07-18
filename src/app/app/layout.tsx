@@ -1,2 +1,2 @@
-import { AppShell } from "@/components/app-shell"; import { getTenant } from "@/features/tenants/server";
-export default async function ExperienceLayout({children}:{children:React.ReactNode}){const tenant=await getTenant();return <AppShell tenant={tenant}>{children}</AppShell>}
+import { AppShell } from "@/components/app-shell"; import { getTenant } from "@/features/tenants/server"; import { requireSession } from "@/lib/session"; import { ensureBetaEnrollment } from "@/features/progress/service"; import { getDb } from "@/db/client";
+export default async function ExperienceLayout({children}:{children:React.ReactNode}){const [tenant,session]=await Promise.all([getTenant(),requireSession()]);if(process.env.BETA_AUTO_ENROLL==="true")await ensureBetaEnrollment(getDb(),tenant.id,session.user.id);return <AppShell tenant={tenant} email={session.user.email}>{children}</AppShell>}

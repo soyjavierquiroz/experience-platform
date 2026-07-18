@@ -1,6 +1,13 @@
 allowBuilds:
+  esbuild: true
   sharp: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@aws-sdk/client-sesv2@3.1090.0'
+overrides:
+  esbuild: 0.28.1
+  postcss: 8.5.19
 onlyBuiltDependencies:
+  - esbuild
   - sharp
   - unrs-resolver

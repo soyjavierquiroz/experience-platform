@@ -1,0 +1,14 @@
+import { execFileSync } from "node:child_process";
+import { and,eq,sql } from "drizzle-orm";
+import { afterAll,beforeAll,describe,expect,it } from "vitest";
+import { getDb,getPool } from "@/db/client";
+import { dayProgress, enrollments, reflectionResponses, tenantMemberships, user } from "@/db/schema";
+import { completeDayOne,ensureBetaEnrollment,getDayOne,saveReflection } from "@/features/progress/service";
+
+const ids=["integration-user-a","integration-user-b"];
+describe.sequential("PostgreSQL persistence",()=>{const db=getDb();beforeAll(async()=>{execFileSync(process.execPath,["scripts/migrate.mjs"],{env:process.env,stdio:"ignore"});execFileSync(process.execPath,["scripts/seed.mjs"],{env:process.env,stdio:"ignore"});execFileSync(process.execPath,["scripts/seed.mjs"],{env:process.env,stdio:"ignore"});await db.delete(user).where(sql`${user.id} in (${ids[0]},${ids[1]})`);await db.insert(user).values(ids.map((id,index)=>({id,name:"Test",email:`m1-${index}@example.test`,emailVerified:true})));});afterAll(async()=>{await db.delete(user).where(sql`${user.id} in (${ids[0]},${ids[1]})`);await getPool().end();});
+  it("seed is idempotent",async()=>{const result=await getPool().query("select count(*)::int as count from tenants where id='mnle'");expect(result.rows[0].count).toBe(1);const days=await getPool().query("select count(*)::int as count from program_days");expect(days.rows[0].count).toBe(7);});
+  it("auto-enrollment is idempotent",async()=>{await ensureBetaEnrollment(db,"mnle",ids[0]);await ensureBetaEnrollment(db,"mnle",ids[0]);expect((await db.select().from(tenantMemberships).where(and(eq(tenantMemberships.tenantId,"mnle"),eq(tenantMemberships.userId,ids[0])))).length).toBe(1);expect((await db.select().from(enrollments).where(and(eq(enrollments.tenantId,"mnle"),eq(enrollments.userId,ids[0])))).length).toBe(1);});
+  it("saves and reloads reflection with tenant and user isolation",async()=>{await ensureBetaEnrollment(db,"mnle",ids[1]);await saveReflection(db,"mnle",ids[0],"Antes del impulso siento mucha ansiedad.");expect((await getDayOne(db,"mnle",ids[0])).response).toContain("ansiedad");expect((await getDayOne(db,"mnle",ids[1])).response).toBe("");});
+  it("completes day one idempotently",async()=>{await completeDayOne(db,"mnle",ids[0],"Antes del impulso siento mucha ansiedad.");await completeDayOne(db,"mnle",ids[0],"Antes del impulso siento mucha ansiedad.");const enrollment=(await db.select().from(enrollments).where(eq(enrollments.userId,ids[0])))[0];expect((await db.select().from(dayProgress).where(and(eq(dayProgress.enrollmentId,enrollment.id),eq(dayProgress.status,"completed")))).length).toBe(1);expect((await db.select().from(reflectionResponses).where(and(eq(reflectionResponses.userId,ids[0]),eq(reflectionResponses.tenantId,"mnle")))).length).toBe(1);});
+});
