@@ -12,12 +12,12 @@ const days=[
   [7,"eligete-de-nuevo","Elígete de nuevo","Cerrar la semana con un plan consciente.","coming_soon"],
 ];
 const blocks=[
-  {id:"intro",type:"richText",paragraphs:["El impulso no aparece de la nada. Suele empezar con un momento, un pensamiento o una sensación que pide alivio inmediato.","Hoy no necesitas resolver toda la historia. Solo observarla con honestidad y sin juzgarte."]},
-  {id:"video",type:"video",title:"Antes de enviar: mira el ciclo completo",duration:"4 min"},
-  {id:"reflection",type:"reflection",prompt:"¿Qué suele ocurrir justo antes de que sientas el impulso de escribirle?"},
-  {id:"action",type:"action",title:"La pausa de hoy",description:"Cuando aparezca el impulso, espera diez minutos. Escribe en una nota: qué pasó, qué sientes y qué necesitas. No tienes que tomar ninguna decisión durante esa pausa."},
-  {id:"resource",type:"download",title:"Mapa del impulso",description:"Una guía breve para reconocer detonante, emoción, necesidad y decisión."},
-  {id:"close",type:"callout",title:"Recuerda",text:"Pausar también es una decisión. Cada minuto de claridad cuenta.",tone:"calm"},
+  {id:"intro",type:"richText",version:1,paragraphs:["El impulso no aparece de la nada. Suele empezar con un momento, un pensamiento o una sensación que pide alivio inmediato.","Hoy no necesitas resolver toda la historia. Solo observarla con honestidad y sin juzgarte."]},
+  {id:"video",type:"video",version:1,title:"Antes de enviar: mira el ciclo completo",assetRef:"mnle-dia-1-video"},
+  {id:"reflection",type:"reflection",version:1,prompt:"¿Qué suele ocurrir justo antes de que sientas el impulso de escribirle?",promptKey:"day-1-trigger"},
+  {id:"action",type:"action",version:1,title:"La pausa de hoy",description:"Cuando aparezca el impulso, espera diez minutos. Escribe en una nota: qué pasó, qué sientes y qué necesitas. No tienes que tomar ninguna decisión durante esa pausa."},
+  {id:"resource",type:"download",version:1,title:"Mapa del impulso",description:"Una guía breve para reconocer detonante, emoción, necesidad y decisión."},
+  {id:"close",type:"callout",version:1,title:"Recuerda",text:"Pausar también es una decisión. Cada minuto de claridad cuenta.",tone:"calm"},
 ];
 const pool=new pg.Pool({connectionString:requiredValue("DATABASE_URL"),max:1});
 try { const client=await pool.connect(); try { await client.query("BEGIN");

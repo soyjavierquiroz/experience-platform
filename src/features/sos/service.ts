@@ -1,0 +1,7 @@
+import { and,desc,eq } from "drizzle-orm";
+import { z } from "zod";
+import { sosExecutions } from "@/db/schema";
+import type { AppDatabase } from "@/db/client";
+export const sosInputSchema=z.object({messageText:z.string().trim().min(1).max(5000),expectedResponse:z.string().trim().min(1).max(2000),desiredOutcome:z.enum(["claridad","atencion","reconciliacion","respuesta","alivio","otra"]),emotionBefore:z.number().int().min(1).max(10),emotionAfter:z.number().int().min(1).max(10).optional(),completed:z.boolean().default(false)});
+export async function saveSosExecution(db:AppDatabase,tenantId:string,userId:string,input:unknown){const value=sosInputSchema.parse(input);return db.insert(sosExecutions).values({tenantId,userId,messageText:value.messageText,expectedResponse:value.expectedResponse,desiredOutcome:value.desiredOutcome,emotionBefore:value.emotionBefore,emotionAfter:value.emotionAfter,status:value.completed?"completed":"saved",completedAt:value.completed?new Date():null}).returning({id:sosExecutions.id});}
+export async function listSosExecutions(db:AppDatabase,tenantId:string,userId:string){return db.select({id:sosExecutions.id,status:sosExecutions.status,createdAt:sosExecutions.createdAt,messageText:sosExecutions.messageText,expectedResponse:sosExecutions.expectedResponse,desiredOutcome:sosExecutions.desiredOutcome,emotionBefore:sosExecutions.emotionBefore,emotionAfter:sosExecutions.emotionAfter}).from(sosExecutions).where(and(eq(sosExecutions.tenantId,tenantId),eq(sosExecutions.userId,userId))).orderBy(desc(sosExecutions.createdAt));}

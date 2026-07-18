@@ -1,0 +1,2 @@
+import { SosForm } from "@/components/sos-form";
+export default function SosPage(){return <><header className="day-hero"><span className="eyebrow">SOS · Siempre disponible</span><h1>Estoy a punto de escribirle</h1><p>Haz una pausa privada antes de decidir.</p></header><aside className="callout notice"><p>Esta herramienta ofrece una pausa guiada y no sustituye apoyo profesional o de emergencia.</p></aside><div style={{height:18}}/><SosForm/></>}

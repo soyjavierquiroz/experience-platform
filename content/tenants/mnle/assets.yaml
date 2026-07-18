@@ -1,0 +1,6 @@
+[
+ {"schemaVersion":"1.0","key":"mnle-dia-1-video","tenantSlug":"mnle","category":"video","provider":"youtube","providerMediaId":"M7lc1UVf-VE","providerMetadata":{"developmentOnly":true},"title":"Video demo de Día 1","aspectRatio":{"type":"3:4"},"status":"placeholder"},
+ {"schemaVersion":"1.0","key":"mnle-sos-audio","tenantSlug":"mnle","category":"audio","provider":"file","providerMetadata":{},"title":"Audio opcional SOS pendiente","aspectRatio":{"type":"3:4"},"status":"placeholder"},
+ {"schemaVersion":"1.0","key":"mnle-dia-1-audio","tenantSlug":"mnle","category":"audio","provider":"file","providerMetadata":{},"title":"Audio opcional Día 1 pendiente","aspectRatio":{"type":"3:4"},"status":"placeholder"},
+ {"schemaVersion":"1.0","key":"mnle-bunny-demo","tenantSlug":"mnle","category":"video","provider":"bunny","providerMetadata":{"libraryId":"placeholder"},"title":"Bunny pendiente de configuración","aspectRatio":{"type":"9:16"},"status":"placeholder"}
+]
