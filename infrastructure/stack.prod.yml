@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   web:
-    image: experience-platform:live-smart-media-20260718-r4
+    image: experience-platform:hybrid-journey-20260718-r1
     environment:
       NODE_ENV: production
       PORT: "3000"
@@ -57,7 +57,7 @@ services:
         order: stop-first
         monitor: 30s
       labels:
-        - experience-platform.release=live-smart-media-20260718-r4
+        - experience-platform.release=hybrid-journey-20260718-r1
         - traefik.enable=true
         - traefik.docker.network=traefik_public
         - traefik.http.routers.experience-platform.rule=Host(`mnle.sayk.us`)

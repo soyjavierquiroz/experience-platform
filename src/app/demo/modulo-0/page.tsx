@@ -1,0 +1,2 @@
+import {ExperienceEngine} from "@/components/experience/experience-engine";import {loadContent} from "@/features/content/loader";
+export default async function DemoModuleZeroPage(){const [compiled]=await loadContent();const experience=compiled.modules.find(module=>module.slug==="sos");if(!experience)throw new Error("Experience unavailable");return <ExperienceEngine experience={experience} assets={Object.fromEntries(compiled.assets.map(asset=>[asset.key,asset]))} entryMode="standard" closeHref="/"/>}
