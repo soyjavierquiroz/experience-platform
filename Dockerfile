@@ -14,7 +14,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN pnpm build
-RUN node_modules/.pnpm/esbuild@*/node_modules/esbuild/bin/esbuild scripts/content.mts --bundle --platform=node --format=esm --outfile=content-publish.mjs
+RUN node_modules/.pnpm/esbuild@*/node_modules/esbuild/bin/esbuild scripts/content.mts --bundle --platform=node --format=esm --external:pg --outfile=content-publish.mjs
 
 FROM node:24.14.0-alpine3.23 AS runner
 WORKDIR /app
