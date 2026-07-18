@@ -1,0 +1,1 @@
+export function rejectDisabledOtpRequest(request:Request,enabled:boolean):Response|undefined {if(!enabled&&new URL(request.url).pathname.includes("email-otp"))return Response.json({message:"El acceso por email se habilitará próximamente."},{status:503});return undefined;}

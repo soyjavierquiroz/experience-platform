@@ -24,6 +24,7 @@ export const tenantBrandingSchema = z.object({
   typography: z.object({ headingFont: z.string().min(1), bodyFont: z.string().min(1) }),
   radius: z.object({ card: z.string().min(1), button: z.string().min(1) }),
   assets: z.object({ logo: z.string(), icon: z.string(), cover: z.string() }),
+  supportEmail: z.email(),
   tagline: z.string().min(1),
 });
 

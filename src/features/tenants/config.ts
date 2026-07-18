@@ -8,6 +8,7 @@ export const tenants: TenantConfig[] = [{
     typography: { headingFont:"Georgia, 'Times New Roman', serif",bodyFont:"Arial, Helvetica, sans-serif" },
     radius: { card:"24px",button:"16px" },
     assets: { logo:"",icon:"/icons/icon.svg",cover:"" },
+    supportEmail: "soporte@sayk.us",
     tagline: "Siete días para pausar, comprender y volver a elegirte.",
   }),
   domains: [{ hostname: "mnle.sayk.us", primary: true }, { hostname: "mnle.localhost", primary: false }],

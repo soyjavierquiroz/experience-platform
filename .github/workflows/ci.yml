@@ -25,9 +25,9 @@ jobs:
       APP_URL: http://127.0.0.1:3100
       BETA_AUTO_ENROLL: "true"
       AUTH_SECURE_COOKIES: "false"
-      EMAIL_PROVIDER: test
-      ALLOW_TEST_EMAIL_PROVIDER: "true"
-      TEST_OTP_FILE: /tmp/experience-platform-ci-otp.jsonl
+      EMAIL_ENABLED: "false"
+      EMAIL_PROVIDER: disabled
+      AUTH_EMAIL_OTP_ENABLED: "false"
       TEST_OTP_CODE: "731946"
     steps:
       - uses: actions/checkout@v4
@@ -47,4 +47,8 @@ jobs:
       - run: pnpm test:integration
       - run: pnpm build
       - run: pnpm exec playwright install --with-deps chromium
-      - run: touch "$TEST_OTP_FILE" && chmod 600 "$TEST_OTP_FILE" && pnpm test:e2e
+      - run: NODE_ENV=test pnpm test:e2e
+        env:
+          EMAIL_ENABLED: "true"
+          EMAIL_PROVIDER: test
+          AUTH_EMAIL_OTP_ENABLED: "true"

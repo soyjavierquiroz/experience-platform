@@ -11,20 +11,15 @@ services:
       TENANT_RESOLUTION_MODE: hostname
       DATABASE_URL_FILE: /run/secrets/experience_database_url_v1
       BETTER_AUTH_SECRET_FILE: /run/secrets/experience_auth_secret_v1
-      AWS_ACCESS_KEY_ID_FILE: /run/secrets/experience_aws_access_key_id_v1
-      AWS_SECRET_ACCESS_KEY_FILE: /run/secrets/experience_aws_secret_access_key_v1
-      AWS_REGION: ${AWS_REGION:?AWS_REGION is required}
-      SES_FROM_EMAIL: acceso@sayk.us
-      SES_REPLY_TO_EMAIL: soporte@sayk.us
-      EMAIL_PROVIDER: ses
+      EMAIL_ENABLED: "false"
+      EMAIL_PROVIDER: disabled
+      AUTH_EMAIL_OTP_ENABLED: "false"
       BETA_AUTO_ENROLL: "true"
       AUTH_SECURE_COOKIES: "true"
       TRUSTED_PROXY_CIDRS: 10.0.1.0/24
     secrets:
       - experience_database_url_v1
       - experience_auth_secret_v1
-      - experience_aws_access_key_id_v1
-      - experience_aws_secret_access_key_v1
     networks:
       - traefik_public
       - general_network
@@ -79,8 +74,4 @@ secrets:
   experience_database_url_v1:
     external: true
   experience_auth_secret_v1:
-    external: true
-  experience_aws_access_key_id_v1:
-    external: true
-  experience_aws_secret_access_key_v1:
     external: true

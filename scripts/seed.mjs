@@ -1,7 +1,7 @@
 import pg from "pg";
 import { requiredValue } from "./runtime-config.mjs";
 
-const branding={colors:{background:"#f8f4e8",surface:"#fffdf7",surfaceMuted:"#eee8f5",primary:"#452750",primaryForeground:"#fffdf7",secondary:"#d9cbea",secondaryForeground:"#35203d",accent:"#b18438",accentForeground:"#1f1722",text:"#281f2b",textMuted:"#706575",border:"#ded4df",success:"#467054",warning:"#a56f25",danger:"#9a3f4c"},typography:{headingFont:"Georgia, 'Times New Roman', serif",bodyFont:"Arial, Helvetica, sans-serif"},radius:{card:"24px",button:"16px"},assets:{logo:"",icon:"/icons/icon.svg",cover:""},tagline:"Siete días para pausar, comprender y volver a elegirte."};
+const branding={colors:{background:"#f8f4e8",surface:"#fffdf7",surfaceMuted:"#eee8f5",primary:"#452750",primaryForeground:"#fffdf7",secondary:"#d9cbea",secondaryForeground:"#35203d",accent:"#b18438",accentForeground:"#1f1722",text:"#281f2b",textMuted:"#706575",border:"#ded4df",success:"#467054",warning:"#a56f25",danger:"#9a3f4c"},typography:{headingFont:"Georgia, 'Times New Roman', serif",bodyFont:"Arial, Helvetica, sans-serif"},radius:{card:"24px",button:"16px"},assets:{logo:"",icon:"/icons/icon.svg",cover:""},supportEmail:"soporte@sayk.us",tagline:"Siete días para pausar, comprender y volver a elegirte."};
 const days=[
   [1,"reconoce-el-ciclo","Reconoce el ciclo","Identificar qué ocurre antes, durante y después del impulso de escribirle.","available"],
   [2,"haz-espacio","Haz espacio","Crear distancia entre el impulso y la acción.","coming_soon"],
