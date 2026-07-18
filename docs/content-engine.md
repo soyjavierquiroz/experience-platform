@@ -14,3 +14,15 @@ La recomendación editorial mobile-first es 3:4. También se aceptan 4:5, 9:16, 
 - `pnpm content:publish`: publica en transacción e idempotentemente; omite drafts salvo `CONTENT_INCLUDE_DRAFTS=true`.
 
 Para añadir otro provider, implementa un componente que reciba `ContentAsset`, traduzca eventos a `VideoEvent`, valida sus IDs y selecciónalo en `VideoPlayer`. Nunca aceptes HTML del creador ni registres URLs firmadas.
+
+## Respuestas y finalización
+
+La reflexión principal continúa en `reflection_responses`. Escalas, checklist y confirmaciones se guardan por ID estable en `content_block_responses`, con aislamiento por tenant, usuario, enrollment y día. La API valida el valor contra el bloque publicado y rechaza IDs que no pertenezcan al día.
+
+Día 1 solo se completa cuando existen la reflexión válida, la escala, todos los elementos configurados del checklist y la confirmación de la acción. La comprobación ocurre en servidor; el video no es obligatorio. Republicar contenido conserva las respuestas mientras los IDs de bloque permanezcan estables.
+
+## Assets y placeholders
+
+Las rutas reales consultan únicamente assets del tenant actual. La representación entregada al renderer elimina metadata privada. Un asset ausente muestra un fallback; un `placeholder` indica explícitamente que el contenido editorial está pendiente.
+
+Audio usa controles nativos sin autoplay. Imagen usa `next/image`, alt obligatorio y la relación declarada. Descarga usa exclusivamente la URL segura declarada en el asset, con tipo y tamaño opcionales; una URL nunca procede del ContentBlock.
