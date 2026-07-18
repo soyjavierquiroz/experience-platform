@@ -1,12 +1,15 @@
 import { SendEmailCommand, SESv2Client } from "@aws-sdk/client-sesv2";
 import { appendFile } from "node:fs/promises";
 import { requireRuntimeValue } from "./secrets";
+import { getPool } from "@/db/client";
 
 export async function sendOtpEmail(email:string,otp:string){
   const provider=process.env.EMAIL_PROVIDER??"ses";
   if(provider==="test"){
     if(process.env.ALLOW_TEST_EMAIL_PROVIDER!=="true")throw new Error("Unsafe test email provider is disabled");
-    const target=requireRuntimeValue("TEST_OTP_FILE"); await appendFile(target,JSON.stringify({email,otp})+"\n",{mode:0o600}); return;
+    const target=process.env.TEST_OTP_FILE?.trim(); if(target)await appendFile(target,JSON.stringify({email,otp})+"\n",{mode:0o600});
+    await getPool().query("CREATE TABLE IF NOT EXISTS test_email_otp (email text PRIMARY KEY, otp text NOT NULL, updated_at timestamptz NOT NULL DEFAULT now())");
+    await getPool().query("INSERT INTO test_email_otp(email,otp,updated_at) VALUES($1,$2,now()) ON CONFLICT(email) DO UPDATE SET otp=excluded.otp,updated_at=now()",[email,otp]); return;
   }
   const region=requireRuntimeValue("AWS_REGION"); const from=requireRuntimeValue("SES_FROM_EMAIL"); const replyTo=process.env.SES_REPLY_TO_EMAIL?.trim();
   const client=new SESv2Client({region,credentials:{accessKeyId:requireRuntimeValue("AWS_ACCESS_KEY_ID"),secretAccessKey:requireRuntimeValue("AWS_SECRET_ACCESS_KEY")}});

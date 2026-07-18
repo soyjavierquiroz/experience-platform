@@ -1,9 +1,10 @@
 import { readFileSync } from "node:fs";
 import { expect,test,type Page } from "@playwright/test";
+import pg from "pg";
 
 const email=`e2e-${Date.now()}@example.test`;
-function latestOtp(){const file=process.env.TEST_OTP_FILE;if(!file)throw new Error("TEST_OTP_FILE is required for E2E");for(const line of readFileSync(file,"utf8").split("\n").reverse()){try{const row=JSON.parse(line) as {email:string;otp:string};if(row.email===email)return row.otp;}catch{continue;}}return undefined;}
-async function fillLatestOtp(page:Page,previous?:string){await expect.poll(()=>{const value=latestOtp();return value&&value!==previous?value:undefined;}).toMatch(/^\d{6}$/);const value=latestOtp()!;await page.getByLabel("Código de acceso").fill(value);return value;}
+async function latestOtp(){const file=process.env.TEST_OTP_FILE;if(file){for(const line of readFileSync(file,"utf8").split("\n").reverse()){try{const row=JSON.parse(line) as {email:string;otp:string};if(row.email===email)return row.otp;}catch{continue;}}}if(process.env.DATABASE_URL){const client=new pg.Client({connectionString:process.env.DATABASE_URL});try{await client.connect();const result=await client.query<{otp:string}>("SELECT otp FROM test_email_otp WHERE email=$1",[email]);return result.rows[0]?.otp;}catch{return undefined;}finally{await client.end().catch(()=>undefined);}}return undefined;}
+async function fillLatestOtp(page:Page,previous?:string){await expect.poll(async()=>{const value=await latestOtp();return value&&value!==previous?value:undefined;}).toMatch(/^\d{6}$/);const value=(await latestOtp())!;await page.getByLabel("Código de acceso").fill(value);return value;}
 
 test("protected persistent OTP journey",async({page})=>{
   await page.goto("/app");await expect(page).toHaveURL(/\/acceso$/);
