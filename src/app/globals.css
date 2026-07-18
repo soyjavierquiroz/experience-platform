@@ -225,6 +225,7 @@ h1,h2,h3 { letter-spacing:-.025em; }
 .demo-video { position:relative; display:flex; min-height:285px; flex-direction:column; justify-content:space-between; overflow:hidden; padding:28px; border-radius:var(--radius-card); background:linear-gradient(150deg,var(--primary),color-mix(in srgb,var(--primary) 58%,var(--secondary-foreground))); color:var(--primary-foreground); box-shadow:var(--shadow-soft); }
 .demo-video:after { position:absolute; right:-18%; bottom:-40%; width:78%; height:100%; border-radius:50% 12% 50% 20%; background:color-mix(in srgb,var(--secondary) 12%,transparent); transform:rotate(-20deg); content:""; }
 .demo-video>div { position:relative; z-index:1; }.demo-video h2 { max-width:430px; margin-bottom:8px; font-size:1.55rem; }.demo-video p { margin:0; opacity:.72; }
+.demo-day-video { display:grid; gap:10px; }.demo-day-video h2,.demo-day-video p { margin:0; }.demo-day-video p { color:var(--text-muted); }.demo-day-video .video-player { margin-top:8px; border:0; box-shadow:var(--shadow-soft); }
 .demo-play { display:grid; width:52px; height:52px; place-items:center; border:1px solid color-mix(in srgb,var(--primary-foreground) 30%,transparent); border-radius:50%; background:color-mix(in srgb,var(--surface) 12%,transparent); }
 .editorial-copy { padding:18px 5px; color:var(--text); font-size:1.03rem; line-height:1.7; }
 .editorial-copy p:last-child { margin-bottom:0; }
@@ -270,3 +271,5 @@ h1,h2,h3 { letter-spacing:-.025em; }
 @media(min-width:780px){.sos-stage{padding-top:45px}.sos-step{padding:0 4px}.sos-audio{padding:24px}.sos-sticky-actions{padding-inline:calc((100% - 720px)/2)}.clear-demo{right:calc((100% - 720px)/2)}}
 @media(max-width:340px){.sos-stage{width:calc(100% - 32px);padding-top:8px}.sos-step>h1,.sos-result h1{font-size:2.05rem}.sos-audio{grid-template-columns:52px minmax(0,1fr) 34px;padding:14px;gap:10px}.sos-audio-play{width:50px;height:50px}.sos-choice button{padding-inline:11px;font-size:.72rem}}
 @media(prefers-reduced-motion:reduce){.sos-step,.sos-result{animation:none}.sos-progress span,.sos-choice button{transition:none}}
+.home-day-one-link { display:flex; min-height:48px; align-items:center; justify-content:center; color:var(--primary); font-size:.82rem; font-weight:800; text-decoration:underline; text-underline-offset:4px; }
+.route-chapter.module-zero { margin-bottom:10px; padding-inline:14px; border:0; border-radius:var(--radius-card); background:color-mix(in srgb,var(--secondary) 38%,var(--surface)); }.route-chapter.module-zero>a { max-width:96px; text-align:center; }
