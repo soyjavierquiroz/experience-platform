@@ -4,7 +4,7 @@ import { tenantBrandingSchema } from "./branding";
 export const tenants: TenantConfig[] = [{
   id: "mnle", slug: "mnle", productName: "Mujer, No Le Escribas", shortName: "MNLE",
   branding: tenantBrandingSchema.parse({
-    colors: { background:"#f8f4e8",surface:"#fffdf7",surfaceMuted:"#eee8f5",primary:"#452750",primaryForeground:"#fffdf7",secondary:"#d9cbea",secondaryForeground:"#35203d",accent:"#b18438",accentForeground:"#1f1722",text:"#281f2b",textMuted:"#706575",border:"#ded4df",success:"#467054",warning:"#a56f25",danger:"#9a3f4c" },
+    colors: { background:"#f8f4e8",surface:"#fffdf7",surfaceMuted:"#f0e9f6",primary:"#452750",primaryForeground:"#fffdf7",secondary:"#d7c2ec",secondaryForeground:"#35203d",accent:"#b86f4b",accentForeground:"#1f1722",text:"#281f2b",textMuted:"#706575",border:"#d8cbdc",success:"#52765b",warning:"#b67a28",danger:"#9a3f4c" },
     typography: { headingFont:"Georgia, 'Times New Roman', serif",bodyFont:"Arial, Helvetica, sans-serif" },
     radius: { card:"24px",button:"16px" },
     assets: { logo:"",icon:"/icons/icon.svg",cover:"" },

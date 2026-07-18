@@ -1,6 +1,7 @@
 {"schemaVersion":"1.0","tenantSlug":"mnle","programSlug":"reto-7-dias","slug":"sos","title":"Estoy a punto de escribirle","status":"published","order":0,"contentVersion":"1.0.0","description":"Una pausa privada y siempre disponible.","estimatedMinutes":10,"alwaysAvailable":true,"unlockRule":{"type":"always"},"completionRule":{"type":"explicit"},"blocks":[
  {"id":"sos-pausa","type":"heading","version":1,"level":2,"text":"Haz una pausa antes de decidir"},
  {"id":"sos-aviso","type":"callout","version":1,"text":"Esta herramienta ofrece una pausa guiada y no sustituye apoyo profesional o de emergencia.","tone":"notice"},
+ {"id":"sos-video-janny","type":"video","version":1,"title":"Antes de escribirle, vuelve a ti","assetRef":"mnle-module-0-video"},
  {"id":"sos-emocion-antes","type":"scale","version":1,"label":"¿Qué intensidad tiene la emoción ahora?","min":1,"max":10,"minLabel":"Baja","maxLabel":"Alta"},
  {"id":"sos-mensaje","type":"textarea","version":1,"label":"¿Qué quieres escribirle?","required":true,"private":true},
  {"id":"sos-expectativa","type":"textarea","version":1,"label":"¿Qué esperas recibir al enviarlo?","required":true,"private":true},
