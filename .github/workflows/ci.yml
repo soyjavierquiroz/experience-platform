@@ -28,6 +28,7 @@ jobs:
       EMAIL_PROVIDER: test
       ALLOW_TEST_EMAIL_PROVIDER: "true"
       TEST_OTP_FILE: /tmp/experience-platform-ci-otp.jsonl
+      TEST_OTP_CODE: "731946"
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
