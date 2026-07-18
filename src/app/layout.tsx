@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { brandingToCssVariables } from "@/features/tenants/branding";
+import { getTenant } from "@/features/tenants/server";
 import "./globals.css";
 
-export const metadata: Metadata = { title: { default: "Mujer, No Le Escribas", template: "%s · Mujer, No Le Escribas" }, description: "Siete días para pausar, comprender y volver a elegirte.", manifest: "/manifest.webmanifest", appleWebApp: { capable: true, statusBarStyle: "default", title: "MNLE" }, icons: { icon: "/icons/icon.svg", apple: "/icons/icon-maskable.svg" } };
-export const viewport: Viewport = { themeColor: "#533b43", colorScheme: "light" };
+export async function generateMetadata(): Promise<Metadata> { const tenant=await getTenant(); return { title:{default:tenant.productName,template:`%s · ${tenant.productName}`},description:tenant.branding.tagline,manifest:"/manifest.webmanifest",appleWebApp:{capable:true,statusBarStyle:"default",title:tenant.shortName},icons:{icon:tenant.branding.assets.icon||"/icons/icon.svg",apple:tenant.branding.assets.icon||"/icons/icon-maskable.svg"} }; }
+export async function generateViewport(): Promise<Viewport> { const tenant=await getTenant(); return {themeColor:tenant.branding.colors.primary,colorScheme:"light"}; }
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="es"><body><div className="site">{children}</div><Script id="sw-register" strategy="afterInteractive">{`if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));`}</Script></body></html>;
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const tenant=await getTenant();
+  return <html lang="es" style={brandingToCssVariables(tenant.branding)}><body><div className="site">{children}</div><Script id="sw-register" strategy="afterInteractive">{`if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));`}</Script></body></html>;
 }

@@ -3,6 +3,7 @@ import type { AppDatabase } from "@/db/client";
 import { programDays, programs, tenantDomains, tenants } from "@/db/schema";
 import { normalizeHostname } from "./resolver";
 import type { TenantConfig, TenantResolver } from "./types";
+import { tenantBrandingSchema } from "./branding";
 
 export class DatabaseTenantResolver implements TenantResolver {
   constructor(private readonly db: AppDatabase,private readonly fallbackSlug="mnle") {}
@@ -14,6 +15,6 @@ export class DatabaseTenantResolver implements TenantResolver {
     if(!row || row.tenant.status!=="active")return null;
     const program=await this.db.select().from(programs).where(eq(programs.tenantId,row.tenant.id)).limit(1);
     const days=program[0]?await this.db.select().from(programDays).where(eq(programDays.programId,program[0].id)).orderBy(programDays.dayNumber):[];
-    return { id:row.tenant.id,slug:row.tenant.slug,productName:row.tenant.productName,shortName:row.tenant.shortName,branding:row.tenant.branding as unknown as TenantConfig["branding"],domains:[{hostname:host,primary:true}],journey:days.map((day)=>({day:day.dayNumber,title:day.title,objective:day.objective,available:day.status==="available"})) };
+    return { id:row.tenant.id,slug:row.tenant.slug,productName:row.tenant.productName,shortName:row.tenant.shortName,branding:tenantBrandingSchema.parse(row.tenant.branding),domains:[{hostname:host,primary:true}],journey:days.map((day)=>({day:day.dayNumber,title:day.title,objective:day.objective,available:day.status==="available"})) };
   }
 }

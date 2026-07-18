@@ -1,10 +1,5 @@
-export interface TenantBranding {
-  primary: string;
-  accent: string;
-  background: string;
-  themeColor: string;
-  tagline: string;
-}
+import type { TenantBranding } from "./branding";
+export type { TenantBranding } from "./branding";
 
 export interface TenantDomain { hostname: string; primary: boolean }
 

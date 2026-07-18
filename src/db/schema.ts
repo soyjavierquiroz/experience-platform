@@ -1,6 +1,7 @@
 import { relations, sql } from "drizzle-orm";
 import { bigint, boolean, index, integer, jsonb, pgEnum, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 import type { ContentBlock } from "@/features/content/schema";
+import type { TenantBranding } from "@/features/tenants/branding";
 
 const timestamps = { createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(), updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull() };
 
@@ -16,7 +17,7 @@ export const dayStatus = pgEnum("day_status",["available","coming_soon"]);
 export const enrollmentStatus = pgEnum("enrollment_status",["active","completed","cancelled"]);
 export const progressStatus = pgEnum("progress_status",["not_started","in_progress","completed"]);
 
-export const tenants = pgTable("tenants", { id:text("id").primaryKey(), slug:text("slug").notNull().unique(), productName:text("product_name").notNull(), shortName:text("short_name").notNull(), status:tenantStatus("status").default("active").notNull(), branding:jsonb("branding").$type<Record<string,string>>().notNull(), ...timestamps });
+export const tenants = pgTable("tenants", { id:text("id").primaryKey(), slug:text("slug").notNull().unique(), productName:text("product_name").notNull(), shortName:text("short_name").notNull(), status:tenantStatus("status").default("active").notNull(), branding:jsonb("branding").$type<TenantBranding>().notNull(), ...timestamps });
 export const tenantDomains = pgTable("tenant_domains", { id:uuid("id").defaultRandom().primaryKey(), tenantId:text("tenant_id").notNull().references(()=>tenants.id,{onDelete:"cascade"}), hostname:text("hostname").notNull().unique(), isPrimary:boolean("is_primary").default(false).notNull(), createdAt:timestamp("created_at",{withTimezone:true}).defaultNow().notNull() },(t)=>[index("tenant_domains_tenant_idx").on(t.tenantId)]);
 export const tenantMemberships = pgTable("tenant_memberships", { id:uuid("id").defaultRandom().primaryKey(), tenantId:text("tenant_id").notNull().references(()=>tenants.id,{onDelete:"cascade"}), userId:text("user_id").notNull().references(()=>user.id,{onDelete:"cascade"}), role:text("role").default("member").notNull(), createdAt:timestamp("created_at",{withTimezone:true}).defaultNow().notNull() },(t)=>[uniqueIndex("tenant_memberships_tenant_user_uq").on(t.tenantId,t.userId),index("tenant_memberships_user_idx").on(t.userId)]);
 export const programs = pgTable("programs", { id:uuid("id").defaultRandom().primaryKey(), tenantId:text("tenant_id").notNull().references(()=>tenants.id,{onDelete:"cascade"}), slug:text("slug").notNull(), title:text("title").notNull(), description:text("description").notNull(), totalDays:integer("total_days").notNull(), status:programStatus("status").default("active").notNull(), ...timestamps },(t)=>[uniqueIndex("programs_tenant_slug_uq").on(t.tenantId,t.slug),index("programs_tenant_idx").on(t.tenantId)]);
