@@ -8,3 +8,4 @@ export function CommunityIcon(props:IconProps){return <svg {...base} {...props}>
 export function ProfileIcon(props:IconProps){return <svg {...base} {...props}><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>}
 export function PauseIcon(props:IconProps){return <svg {...base} {...props}><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="M9 9v6M15 9v6"/></svg>}
 export function ArrowIcon(props:IconProps){return <svg {...base} {...props}><path d="M5 12h14M13 6l6 6-6 6"/></svg>}
+export function PlayIcon(props:IconProps){return <svg {...base} {...props}><path d="m9 7 8 5-8 5V7Z"/></svg>}

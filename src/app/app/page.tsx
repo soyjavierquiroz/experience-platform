@@ -1,5 +1,5 @@
 import { getDb } from "@/db/client";
-import { CompactProgress,NextStepCard,SosQuickAction,TodayHero } from "@/components/today-dashboard";
+import { NextStepCard,SosQuickAction,TodayHero } from "@/components/today-dashboard";
 import { getProgressSummary } from "@/features/progress/service";
 import { getTenant } from "@/features/tenants/server";
 import { requireSession } from "@/lib/session";
@@ -12,8 +12,7 @@ export default async function TodayPage(){
   const complete=progress.completed>0;
   return <div className="today-dashboard">
     <TodayHero eyebrow="Tu espacio de hoy" title="Hola, respira." description={`${session.user.email}. No necesitas tener todas las respuestas. Solo dar el siguiente paso.`}/>
-    <NextStepCard label={complete?"PRÓXIMAMENTE · DÍA 2":"DÍA 1 · SIGUIENTE PASO"} title={complete?nextDay.title:day.title} description={complete?"Tu siguiente espacio se abrirá muy pronto.":day.objective} href={complete?undefined:"/app/dia/1"} action={complete?undefined:"Empezar el Día 1"}/>
-    <CompactProgress completed={progress.completed} total={progress.total} percent={progress.percent} message={complete?"Ya comenzaste. Tu siguiente espacio estará listo pronto.":"Tu siguiente paso está listo para cuando tú quieras."}/>
+    <NextStepCard label={complete?"Próximamente · Día 2":"Siguiente paso"} title={complete?nextDay.title:day.title} description={complete?"Tu siguiente espacio se abrirá muy pronto.":"Observa qué ocurre antes, durante y después del impulso de escribirle."} href={complete?undefined:"/app/dia/1"} action={complete?undefined:"Comenzar la experiencia"} completed={progress.completed} total={progress.total} percent={progress.percent}/>
     <SosQuickAction question="¿Sientes el impulso de escribirle?" action="Pausar ahora" href="/app/sos"/>
   </div>;
 }

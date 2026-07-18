@@ -1,16 +1,15 @@
 import { AppShell } from "@/components/app-shell";
-import { CompactProgress,NextStepCard,SosQuickAction,TodayHero } from "@/components/today-dashboard";
+import { NextStepCard,SosQuickAction,TodayHero } from "@/components/today-dashboard";
 import { getTenant } from "@/features/tenants/server";
 
 export default async function Landing(){
   const tenant=await getTenant();
   const day=tenant.journey.find(item=>item.day===1)??tenant.journey[0];
-  return <AppShell tenant={tenant} user={{email:"Tu espacio",name:"Tú"}}>
+  return <AppShell tenant={tenant} user={{email:"maria@demo.local",name:"María"}} demo>
     <div className="today-dashboard">
-      <TodayHero eyebrow="Tu espacio de hoy" title="Hola, respira." description="No necesitas tener todas las respuestas. Solo dar el siguiente paso."/>
-      <NextStepCard label="DÍA 1 · SIGUIENTE PASO" title={day.title} description={day.objective} href="/acceso" action="Empezar el Día 1"/>
-      <CompactProgress completed={0} total={7} percent={0} message="Tu siguiente paso está listo para cuando tú quieras."/>
-      <SosQuickAction question="¿Sientes el impulso de escribirle?" action="Pausar ahora" href="/acceso"/>
+      <TodayHero eyebrow="Tu momento de hoy" title="Hola, María." description="Respira. No necesitas resolverlo todo ahora."/>
+      <NextStepCard label="Siguiente paso" title={day.title} description="Observa qué ocurre antes, durante y después del impulso de escribirle." href="/demo/dia/1" action="Comenzar la experiencia"/>
+      <SosQuickAction question="¿Sientes el impulso de escribirle?" action="Pausar ahora" href="/demo/sos"/>
     </div>
   </AppShell>;
 }
