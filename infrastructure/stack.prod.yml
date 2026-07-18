@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   web:
-    image: ${EXPERIENCE_IMAGE:-experience-platform:m1-auth-persistence}
+    image: experience-platform:live-dcd8e848
     environment:
       NODE_ENV: production
       PORT: "3000"
